@@ -1,5 +1,6 @@
 module.exports = {
   extends: ['airbnb-typescript-prettier'],
+  plugins: ['import-order-autofix/order'],
   rules: {
     'import/prefer-default-export': 'off',
     'react/jsx-props-no-spreading': 'off',
