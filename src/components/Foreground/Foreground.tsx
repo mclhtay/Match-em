@@ -18,7 +18,12 @@ export const Foreground: React.FC<Props> = ({ children }: Props) => (
   <>
     {isMobile ? (
       <div>
-        <p>Mobile support is currently not available 😩</p>
+        <p>
+          Mobile support is currently not available{' '}
+          <span role="img" aria-label="emoji">
+            😩
+          </span>
+        </p>
       </div>
     ) : (
       <ForegroundWrapper {...size}>{children}</ForegroundWrapper>

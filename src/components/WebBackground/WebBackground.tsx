@@ -31,11 +31,11 @@ interface Props {
 export const WebBackground: React.FC<Props> = ({ children }: Props) => (
   <WebWrapper>
     <Image>
-      <img src={left} alt="left display image" />
+      <img src={left} alt="left display" />
     </Image>
     <Foreground>{children}</Foreground>
     <Image>
-      <img src={right} alt="right display image" />
+      <img src={right} alt="right display" />
     </Image>
   </WebWrapper>
 );

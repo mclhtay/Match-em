@@ -5,6 +5,6 @@ export interface UserState {
 }
 
 export interface UserRecord {
-  username: string;
-  diamonds: number;
+  username?: string;
+  diamonds?: number;
 }

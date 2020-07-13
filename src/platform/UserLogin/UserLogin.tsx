@@ -1,10 +1,10 @@
 import * as React from 'react';
-import styled, { keyframes } from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { StoreState } from '../../store/store';
 import { Loading } from '../../components/Loading';
-import { loadUserAction } from '../../store/reducers/user';
-
+import { loadUserAction, updateUserAction } from '../../store/reducers/user';
+import { SignUpForm } from '../../components/SignUpForm';
+import { signUpFormElements } from '../constants';
 export const UserLogin: React.FC = () => {
   const dispatch = useDispatch();
   const userLoadingState = useSelector<StoreState, boolean>(
@@ -16,11 +16,22 @@ export const UserLogin: React.FC = () => {
 
   React.useEffect(() => {
     dispatch(loadUserAction());
-  }, []);
+  }, [dispatch]);
 
   if (userLoadingState) {
     return <Loading loadingMsg="Loading ... " />;
   }
 
-  return <>{userRegistered ? userRegistered : 'None'}</>;
+  return (
+    <>
+      {userRegistered ? (
+        userRegistered
+      ) : (
+        <SignUpForm
+          formElements={signUpFormElements}
+          submitAction={updateUserAction}
+        />
+      )}
+    </>
+  );
 };

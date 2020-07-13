@@ -1,7 +1,6 @@
 import * as React from 'react';
 import styled, { keyframes } from 'styled-components';
 import title from '../../assets/components/title.png';
-import { rem } from 'polished';
 import { gameTitle } from '../constants';
 import { Link } from 'react-router-dom';
 
@@ -49,16 +48,22 @@ const Login = styled.h4`
   animation: ${flash} 2s infinite;
   cursor: pointer;
   font-size: 2rem;
+  .no-decor {
+    text-decoration: none;
+    color: white;
+  }
 `;
 
 export const FrontPage: React.FC = () => (
   <FPWrapper>
-    <img src={title} width="100%" height="100%" />
+    <img src={title} width="100%" height="100%" alt="frontpage" />
     <FPUX>
       <GameTitle>{gameTitle}</GameTitle>
       <LoginWrapper>
         <Login>
-          <Link to="/login">Start</Link>
+          <Link className="no-decor" to="/login">
+            Start
+          </Link>
         </Login>
       </LoginWrapper>
     </FPUX>
