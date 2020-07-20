@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserState, UserRecord } from './types';
 import { localHistoryKey } from '../../constants';
 import camelcase from 'camelcase-keys';
-import { compose, mergeAll, reduce } from 'ramda';
+import { compose, mergeAll } from 'ramda';
 const initialState: UserState = {
   username: '',
   diamonds: undefined,

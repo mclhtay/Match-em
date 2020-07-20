@@ -5,6 +5,8 @@ import { Loading } from '../../components/Loading';
 import { loadUserAction, updateUserAction } from '../../store/reducers/user';
 import { SignUpForm } from '../../components/SignUpForm';
 import { signUpFormElements } from '../constants';
+import { NewUser } from '../NewUser';
+
 export const UserLogin: React.FC = () => {
   const dispatch = useDispatch();
   const userLoadingState = useSelector<StoreState, boolean>(
@@ -25,7 +27,7 @@ export const UserLogin: React.FC = () => {
   return (
     <>
       {userRegistered ? (
-        userRegistered
+        <NewUser />
       ) : (
         <SignUpForm
           formElements={signUpFormElements}
