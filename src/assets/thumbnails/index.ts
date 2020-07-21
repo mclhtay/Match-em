@@ -3,12 +3,12 @@ import alice from './Alice2.png';
 import leafa from './b-leafa.png';
 import eugeo from './Eugeo3.png';
 import silica from './onsen-silica.png';
-import asuna from './osasuna.png';
+import asuna from './os-asuna.png';
 import rain from './rainy-rain.png';
 import yui from './sport-yui.png';
 import kirito from './w-kirito.png';
 
-export const portraits = {
+export const thumbnails = {
   sinon: {
     name: 'Sinon',
     src: sinon
@@ -47,4 +47,4 @@ export const portraits = {
   }
 };
 
-export const allKeys = Object.keys(portraits);
+export const allKeys = Object.keys(thumbnails);

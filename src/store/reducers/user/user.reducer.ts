@@ -3,10 +3,13 @@ import { UserState, UserRecord } from './types';
 import { localHistoryKey } from '../../constants';
 import camelcase from 'camelcase-keys';
 import { compose, mergeAll } from 'ramda';
+
 const initialState: UserState = {
   username: '',
-  diamonds: undefined,
-  loading: true
+  diamonds: 0,
+  loading: true,
+  characters: [],
+  defaultCharacter: { name: '', key: '' }
 };
 
 const userSlice = createSlice({

@@ -5,7 +5,7 @@ import { Loading } from '../../components/Loading';
 import { loadUserAction, updateUserAction } from '../../store/reducers/user';
 import { SignUpForm } from '../../components/SignUpForm';
 import { signUpFormElements } from '../constants';
-import { NewUser } from '../NewUser';
+import { WelcomeUser } from '../WelcomeUser';
 
 export const UserLogin: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export const UserLogin: React.FC = () => {
   return (
     <>
       {userRegistered ? (
-        <NewUser />
+        <WelcomeUser />
       ) : (
         <SignUpForm
           formElements={signUpFormElements}
