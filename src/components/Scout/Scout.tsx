@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { ScoutBanner } from 'src/components/ScoutBanner';
 import { useSelector, useDispatch } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
-import { path } from 'ramda';
+import { path, prop } from 'ramda';
 import { StoreState } from 'src/store/store';
-
+import { enterScoutAction, ScoutState } from 'src/store/reducers/scout';
 interface Props {
   scoutTitle: string;
   cost: number;
@@ -31,18 +31,35 @@ export const Scout: React.FC<Props> = ({ scoutTitle, cost }: Props) => {
     (diamonds: number) => diamonds >= cost
   );
   const userDiamonds = useSelector<StoreState, boolean>(userDiamondSelector);
-  const [inScout, setInScout] = React.useState<boolean>(false);
+  const scout = useSelector<StoreState, ScoutState>(prop('scout'));
 
   const handleScout = () => {
-    // make reducer for scout
-    // animation
+    dispatch(enterScoutAction());
   };
 
   return (
     <ScoutWrapper>
-      <ScoutBanner />
-      <ScoutTitle>{scoutTitle}</ScoutTitle>
-      <CostButton cost={cost} scout={handleScout} disabled={userDiamonds} />
+      {scout.isDone ? (
+        <div>{scout.scouted.name}</div>
+      ) : (
+        <>
+          <ScoutBanner
+            animationIndex={scout.index}
+            inScout={scout.inScout}
+            finalIndex={scout.finalIndex}
+          />
+          {!scout.inScout && (
+            <>
+              <ScoutTitle>{scoutTitle}</ScoutTitle>
+              <CostButton
+                cost={cost}
+                scout={handleScout}
+                disabled={userDiamonds}
+              />
+            </>
+          )}
+        </>
+      )}
     </ScoutWrapper>
   );
 };
