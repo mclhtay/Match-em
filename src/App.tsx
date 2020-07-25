@@ -5,7 +5,7 @@ import { WebBackground } from './components/WebBackground';
 import store from './store/store';
 import { Provider } from 'react-redux';
 import { UserLogin } from './platform/UserLogin';
-
+import { Main } from './platform/Main';
 function App() {
   return (
     <Provider store={store}>
@@ -17,6 +17,9 @@ function App() {
             </Route>
             <Route path="/login">
               <UserLogin />
+            </Route>
+            <Route path="/main">
+              <Main />
             </Route>
           </WebBackground>
         </Switch>

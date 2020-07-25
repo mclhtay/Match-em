@@ -4,11 +4,14 @@ export interface UserState {
   loading: boolean;
   characters: Characters;
   defaultCharacter: Character;
+  isDoneOnboarding: boolean;
 }
 
 export interface UserRecord {
   username?: string;
   diamonds?: number;
+  characters?: Characters;
+  defaultCharacter?: Character;
 }
 
 export interface Character {

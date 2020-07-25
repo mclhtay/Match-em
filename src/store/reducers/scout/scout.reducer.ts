@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ScoutState } from './types';
 import { portraits, allKeys } from 'src/assets/portraits';
+import { saveScoutAction } from '../user';
 
 const initialState: ScoutState = {
   isDone: false,
@@ -49,7 +50,7 @@ const genIndex = (maxIndex: number, prev?: number) => {
   return curr;
 };
 
-export const enterScoutAction = () => dispatch => {
+export const enterScoutAction = (cost: number) => dispatch => {
   const finalIndex = genIndex(allKeys.length);
 
   const scoutIndexes: Array<number> = [];
@@ -66,6 +67,7 @@ export const enterScoutAction = () => dispatch => {
       }
     })
   );
+  dispatch(saveScoutAction(cost));
 };
 
 export const exitScoutAction = () => dispatch => {

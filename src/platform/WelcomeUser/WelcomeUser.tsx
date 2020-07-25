@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useSelector } from 'react-redux';
 import { StoreState } from '../../store/store';
 import { prop } from 'ramda';
-import { portraits } from 'src/assets/portraits';
 import { UserState } from '../../store/reducers/user';
 import { NewUser } from './NewUser';
+import { Redirect } from 'react-router-dom';
 
 export const WelcomeUser: React.FC = () => {
   const userState = useSelector<StoreState, UserState>(prop('user'));
-  const { username, characters } = userState;
+  const { isDoneOnboarding } = userState;
 
-  return <>{characters.length > 0 ? <div>{username}</div> : <NewUser />}</>;
+  return <>{isDoneOnboarding ? <Redirect to="/main" /> : <NewUser />}</>;
 };

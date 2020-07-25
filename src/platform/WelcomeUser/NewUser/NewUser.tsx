@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Scout } from 'src/components/Scout';
+import { Scout } from 'src/platform/Scout';
 import { ConfirmationButton } from 'src/components/ConfirmationButton';
 const FrameWrapper = styled.div`
   width: 100%;
