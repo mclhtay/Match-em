@@ -47,10 +47,10 @@ const ImgWrapper = styled.div`
   justify-content: center;
 `;
 
-const Button = styled.div<{ animation: boolean }>`
+const Button = styled.div<{ animation: boolean; color: string }>`
   text-transform: capitalize;
-  background-color: #ade498;
-  color: black;
+  background-color: ${props => props.color};
+  color: white;
   border: 5px;
   opacity: ${props => (props.animation ? 0 : 1)};
   width: ${rem('200px')};
@@ -84,7 +84,11 @@ export const PostScout: React.FC<Props> = ({ scouted, onConfirm }: Props) => {
       </ImgWrapper>
       <ButtonWrapper>
         <Link to="/main">
-          <Button animation={animation} onClick={onConfirm}>
+          <Button
+            animation={animation}
+            onClick={onConfirm}
+            color={portraits[scouted.code].color}
+          >
             confirm
           </Button>
         </Link>

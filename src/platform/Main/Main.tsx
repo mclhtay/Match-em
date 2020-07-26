@@ -5,7 +5,8 @@ import { StoreState } from '../../store/store';
 import { UserState } from '../../store/reducers/user';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
-
+import { CharacterPanel } from 'src/components/CharacterPanel';
+import { GamePanel } from 'src/components/GamePanel';
 const MainWrapper = styled.div`
   height: 100%;
   width: 100%;
@@ -37,7 +38,6 @@ export const Main: React.FC = () => {
       <GamePanel
         username={username}
         diamonds={diamonds}
-        characters={characters}
         onGame={handleGame}
         onStorage={handleStorage}
         onScout={handleScout}

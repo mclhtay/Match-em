@@ -11,39 +11,48 @@ import kirito from './w-kirito.png';
 export const portraits = {
   sinon: {
     name: 'Sinon',
-    src: sinon
+    src: sinon,
+    color: '#C2E0F9'
   },
   alice: {
     name: 'Alice',
-    src: alice
+    src: alice,
+    color: '#fda50f'
   },
   leafa: {
     name: 'Leafa',
-    src: leafa
+    src: leafa,
+    color: '#228c22'
   },
   eugeo: {
     name: 'Eugeo',
-    src: eugeo
+    src: eugeo,
+    color: '#C2E0F9'
   },
   silica: {
     name: 'Silica',
-    src: silica
+    src: silica,
+    color: '#ff5349'
   },
   asuna: {
     name: 'Asuna',
-    src: asuna
+    src: asuna,
+    color: '#ffa500'
   },
   kirito: {
     name: 'Kirito',
-    src: kirito
+    src: kirito,
+    color: '#00008b'
   },
   rain: {
     name: 'Rain',
-    src: rain
+    src: rain,
+    color: '#C2E0F9'
   },
   yui: {
     name: 'Yui',
-    src: yui
+    src: yui,
+    color: '#228c22'
   }
 };
 
