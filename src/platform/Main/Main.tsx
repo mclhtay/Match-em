@@ -7,6 +7,8 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 import { CharacterPanel } from 'src/components/CharacterPanel';
 import { GamePanel } from 'src/components/GamePanel';
+import { StorageModal } from 'src/components/StorageModal';
+
 const MainWrapper = styled.div`
   height: 100%;
   width: 100%;
@@ -17,9 +19,18 @@ const MainWrapper = styled.div`
   align-items: center;
 `;
 
+enum VIEW_STATE {
+  MAIN,
+  GAME,
+  STORAGE,
+  SCOUT
+}
+
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector<StoreState, UserState>(prop('user'));
+
+  const [viewState, setViewState] = React.useState<VIEW_STATE>(VIEW_STATE.MAIN);
   const {
     defaultCharacter: { key },
     username,
@@ -29,19 +40,26 @@ export const Main: React.FC = () => {
   if (!key) return <Redirect to="/" />;
 
   const handleGame = () => {};
-  const handleStorage = () => {};
+  const handleStorage = () => {
+    setViewState(VIEW_STATE.STORAGE);
+  };
   const handleScout = () => {};
 
   return (
-    <MainWrapper>
-      <CharacterPanel character={key} />
-      <GamePanel
-        username={username}
-        diamonds={diamonds}
-        onGame={handleGame}
-        onStorage={handleStorage}
-        onScout={handleScout}
-      />
-    </MainWrapper>
+    <>
+      {viewState === VIEW_STATE.STORAGE && (
+        <StorageModal characters={characters} />
+      )}
+      <MainWrapper>
+        <CharacterPanel character={key} />
+        <GamePanel
+          username={username}
+          diamonds={diamonds}
+          onGame={handleGame}
+          onStorage={handleStorage}
+          onScout={handleScout}
+        />
+      </MainWrapper>
+    </>
   );
 };
