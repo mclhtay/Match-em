@@ -23,7 +23,7 @@ const WrapperOverlay = styled.div`
   width: 100%;
   top: 0;
   left: 0;
-  z-index: 99999;
+  z-index: 99;
 `;
 
 const roll = keyframes`
@@ -79,7 +79,6 @@ const CharacterName = styled.h1<{ color: string }>`
 `;
 
 export const CharacterPanel: React.FC<Props> = ({ character }: Props) => {
-  character = 'yui';
   return (
     <Wrapper>
       <BackgroundWrapper>

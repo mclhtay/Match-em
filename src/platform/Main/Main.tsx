@@ -29,6 +29,14 @@ enum VIEW_STATE {
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector<StoreState, UserState>(prop('user'));
+  const handleGame = () => {};
+  const handleStorage = () => {
+    if (viewState === VIEW_STATE.STORAGE) setViewState(VIEW_STATE.MAIN);
+    else setViewState(VIEW_STATE.STORAGE);
+  };
+  const handleScout = () => {
+    setViewState(VIEW_STATE.SCOUT);
+  };
 
   const [viewState, setViewState] = React.useState<VIEW_STATE>(VIEW_STATE.MAIN);
   const {
@@ -39,17 +47,16 @@ export const Main: React.FC = () => {
   } = user;
   if (!key) return <Redirect to="/" />;
 
-  const handleGame = () => {};
-  const handleStorage = () => {
-    setViewState(VIEW_STATE.STORAGE);
-  };
-  const handleScout = () => {};
-
   return (
     <>
       {viewState === VIEW_STATE.STORAGE && (
-        <StorageModal characters={characters} />
+        <StorageModal
+          characters={characters}
+          onClose={handleStorage}
+          defaultChar={key}
+        />
       )}
+      {viewState === VIEW_STATE.SCOUT && <Redirect to="/scout" />}
       <MainWrapper>
         <CharacterPanel character={key} />
         <GamePanel

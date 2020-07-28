@@ -6,6 +6,7 @@ import store from './store/store';
 import { Provider } from 'react-redux';
 import { UserLogin } from './platform/UserLogin';
 import { Main } from './platform/Main';
+import { Scout } from './platform/Scout';
 function App() {
   return (
     <Provider store={store}>
@@ -20,6 +21,9 @@ function App() {
             </Route>
             <Route path="/main">
               <Main />
+            </Route>
+            <Route path="/scout">
+              <Scout scoutTitle="Hero Scout" cost={250} />
             </Route>
           </WebBackground>
         </Switch>

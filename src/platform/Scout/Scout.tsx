@@ -13,6 +13,7 @@ import {
 } from 'src/store/reducers/scout';
 import { PostScout } from '../../components/PostScout';
 import { userExistAction } from 'src/store/reducers/user';
+import { Link } from 'react-router-dom';
 
 interface Props {
   scoutTitle: string;
@@ -24,6 +25,9 @@ const ScoutWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: black;
 `;
 
 const ScoutTitle = styled.h1`
@@ -68,6 +72,11 @@ export const Scout: React.FC<Props> = ({ scoutTitle, cost }: Props) => {
                 scout={handleScout}
                 disabled={userDiamonds}
               />
+              {!userDiamonds && (
+                <Link type="button" to="/main">
+                  Cancel
+                </Link>
+              )}
             </>
           )}
         </>

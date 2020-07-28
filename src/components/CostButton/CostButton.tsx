@@ -34,7 +34,7 @@ const ButtonInner = styled.div`
 
 const ButtonIcon = styled.div``;
 
-const ButtonContent = styled.div`
+const ButtonContent = styled.button`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +58,9 @@ export const CostButton: React.FC<Props> = ({
   return (
     <ButtonWrapper
       className={userDiamonds ? undefined : 'disable'}
-      onClick={scout}
+      onClick={() => {
+        if (userDiamonds) scout();
+      }}
     >
       <ButtonInner>
         <ButtonIcon>
