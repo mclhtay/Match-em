@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { CharacterPanel } from 'src/components/CharacterPanel';
 import { GamePanel } from 'src/components/GamePanel';
 import { StorageModal } from 'src/components/StorageModal';
+import { startGameAction } from 'src/store/reducers/game';
 
 const MainWrapper = styled.div`
   height: 100%;
@@ -29,7 +30,10 @@ enum VIEW_STATE {
 export const Main: React.FC = () => {
   const dispatch = useDispatch();
   const user = useSelector<StoreState, UserState>(prop('user'));
-  const handleGame = () => {};
+  const handleGame = () => {
+    setViewState(VIEW_STATE.GAME);
+    dispatch(startGameAction());
+  };
   const handleStorage = () => {
     if (viewState === VIEW_STATE.STORAGE) setViewState(VIEW_STATE.MAIN);
     else setViewState(VIEW_STATE.STORAGE);
@@ -57,6 +61,7 @@ export const Main: React.FC = () => {
         />
       )}
       {viewState === VIEW_STATE.SCOUT && <Redirect to="/scout" />}
+      {viewState === VIEW_STATE.GAME && <Redirect to="/game" />}
       <MainWrapper>
         <CharacterPanel character={key} />
         <GamePanel

@@ -83,7 +83,6 @@ export const updateUserAction = (updates: UserRecord) => dispatch => {
     makeArray(casedKeys),
     JSON.parse
   )(history);
-  console.log(updatedHistory);
   localStorage.setItem(localHistoryKey, updatedHistory);
 };
 

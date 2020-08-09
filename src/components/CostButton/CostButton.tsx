@@ -34,7 +34,7 @@ const ButtonInner = styled.div`
 
 const ButtonIcon = styled.div``;
 
-const ButtonContent = styled.button`
+const ButtonContent = styled.button<{ disabled: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,6 +43,9 @@ const ButtonContent = styled.button`
   margin: ${rem('20px')};
   color: black;
   font-size: ${rem('20px')};
+  background: none;
+  border: none;
+  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
 `;
 
 const ButtonSubtext = styled.div`
@@ -66,7 +69,7 @@ export const CostButton: React.FC<Props> = ({
         <ButtonIcon>
           <img src={components.diamond} alt="diamond" height="100px" />
         </ButtonIcon>
-        <ButtonContent>
+        <ButtonContent disabled={!userDiamonds}>
           cost: {cost}
           {!userDiamonds && <ButtonSubtext>not enough diamonds</ButtonSubtext>}
         </ButtonContent>

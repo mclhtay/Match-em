@@ -1,9 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Modal } from '../Modal';
-import { Characters, Character } from 'src/store/reducers/user';
+import {
+  Characters,
+  Character,
+  UserRecord,
+  updateUserAction
+} from 'src/store/reducers/user';
 import { thumbnails } from 'src/assets/thumbnails';
 import { rem } from 'polished';
+import { useDispatch } from 'react-redux';
+
 interface Props {
   characters: Characters;
   onClose: () => void;
@@ -77,10 +84,21 @@ export const StorageModal: React.FC<Props> = ({
   defaultChar,
   onClose
 }: Props) => {
+  const dispatch = useDispatch();
   React.useEffect(() => {
     document.addEventListener('keydown', keyboardListener(onClose));
   }, [onClose]);
   const [selected, setSelected] = React.useState<string>(defaultChar);
+
+  const handleSetDefault = () => {
+    const defaultCharacter: Character = {
+      key: selected,
+      name: thumbnails[selected].name
+    };
+    const userRecord: UserRecord = { defaultCharacter };
+    dispatch(updateUserAction(userRecord));
+  };
+
   return (
     <Modal>
       <ModalContentWrapper>
@@ -96,10 +114,14 @@ export const StorageModal: React.FC<Props> = ({
             </CharacterWrapper>
           ))}
         </CharactersWrapper>
-        <ButtonsWrapper>
 
-          {// need to dispatch set default character}
-          <Button disabled={selected === defaultChar} >Set Default</Button>
+        <ButtonsWrapper>
+          <Button
+            disabled={selected === defaultChar}
+            onClick={handleSetDefault}
+          >
+            Set Default
+          </Button>
           <Button onClick={onClose}>Done</Button>
         </ButtonsWrapper>
       </ModalContentWrapper>
