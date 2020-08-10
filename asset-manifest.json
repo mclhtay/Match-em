@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.js": "/Match-em/static/js/main.5310fef7.chunk.js",
+    "main.js.map": "/Match-em/static/js/main.5310fef7.chunk.js.map",
+    "runtime-main.js": "/Match-em/static/js/runtime-main.a4b22381.js",
+    "runtime-main.js.map": "/Match-em/static/js/runtime-main.a4b22381.js.map",
+    "static/js/2.7d212d6e.chunk.js": "/Match-em/static/js/2.7d212d6e.chunk.js",
+    "static/js/2.7d212d6e.chunk.js.map": "/Match-em/static/js/2.7d212d6e.chunk.js.map",
+    "index.html": "/Match-em/index.html",
+    "precache-manifest.9a4270ba8f1223d515bfae8b8c928cf8.js": "/Match-em/precache-manifest.9a4270ba8f1223d515bfae8b8c928cf8.js",
+    "service-worker.js": "/Match-em/service-worker.js",
+    "static/js/2.7d212d6e.chunk.js.LICENSE.txt": "/Match-em/static/js/2.7d212d6e.chunk.js.LICENSE.txt",
+    "static/media/Alice2.png": "/Match-em/static/media/Alice2.be6109be.png",
+    "static/media/Eugeo3.png": "/Match-em/static/media/Eugeo3.9dc9f2d6.png",
+    "static/media/a-sinon.png": "/Match-em/static/media/a-sinon.abbe6d3f.png",
+    "static/media/b-leafa.png": "/Match-em/static/media/b-leafa.c6ad05f4.png",
+    "static/media/controller.png": "/Match-em/static/media/controller.49be59bd.png",
+    "static/media/diamond.png": "/Match-em/static/media/diamond.56468443.png",
+    "static/media/onsen-silica.png": "/Match-em/static/media/onsen-silica.cba6ab13.png",
+    "static/media/os-asuna.png": "/Match-em/static/media/os-asuna.7d9c44e6.png",
+    "static/media/osasuna.png": "/Match-em/static/media/osasuna.8b26aecf.png",
+    "static/media/rainy-rain.png": "/Match-em/static/media/rainy-rain.bf77189a.png",
+    "static/media/sport-yui.png": "/Match-em/static/media/sport-yui.86c4f5f8.png",
+    "static/media/title.png": "/Match-em/static/media/title.6c8e694d.png",
+    "static/media/w-kirito.png": "/Match-em/static/media/w-kirito.d27be383.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a4b22381.js",
+    "static/js/2.7d212d6e.chunk.js",
+    "static/js/main.5310fef7.chunk.js"
+  ]
+}
