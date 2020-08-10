@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import title from '../../assets/components/title.png';
 import { gameTitle } from '../constants';
 import { Link } from 'react-router-dom';
-
+import { rem } from 'polished';
 const FPWrapper = styled.div`
   height: 100%;
   width: 100%;
@@ -22,7 +22,7 @@ const FPUX = styled.section`
 `;
 
 const GameTitle = styled.h1`
-  font-size: 10rem;
+  font-size: ${rem('100px')};
   color: rgb(188, 211, 231);
 `;
 

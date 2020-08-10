@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 import { portraits, allKeys } from 'src/assets/portraits';
 import { exitScoutAction } from 'src/store/reducers/scout';
 import { useDispatch } from 'react-redux';
+
 const BannerWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -41,7 +42,7 @@ const BannerOverlay = styled.div`
   }
 `;
 
-const BannerImg = styled.img.attrs({ width: '170px', height: '200px' })`
+const BannerImg = styled.img`
   opacity: 1;
 `;
 
@@ -49,19 +50,34 @@ interface Props {
   animationIndex: Array<number>;
   inScout: boolean;
   finalIndex: number;
+  di: React.RefObject<HTMLDivElement>;
 }
 
 export const ScoutBanner: React.FC<Props> = ({
   animationIndex,
   inScout,
-  finalIndex
+  finalIndex,
+  di
 }: Props) => {
   const dispatch = useDispatch();
 
+  const [dimen, setDimen] = React.useState<{ height: number; width: number }>({
+    height: 0,
+    width: 0
+  });
   const [curr, setCurr] = React.useState<{ index: number; value: number }>({
     index: -1,
     value: -1
   });
+
+  React.useEffect(() => {
+    if (di.current) {
+      setDimen({
+        height: di.current.clientHeight,
+        width: di.current.clientWidth
+      });
+    }
+  }, []);
 
   React.useEffect(() => {
     if (curr.index < animationIndex.length && inScout) {
@@ -86,7 +102,12 @@ export const ScoutBanner: React.FC<Props> = ({
     <BannerWrapper>
       {allKeys.map((key, index) => (
         <BannerItem key={key}>
-          <BannerImg src={portraits[key].src} alt={portraits[key].name} />
+          <BannerImg
+            src={portraits[key].src}
+            alt={portraits[key].name}
+            width={`${dimen.width * 0.15}px`}
+            height={`${dimen.height * 0.2}px`}
+          />
           {curr.value === index && (
             <BannerOverlay
               className={curr.value === finalIndex ? 'flash' : undefined}

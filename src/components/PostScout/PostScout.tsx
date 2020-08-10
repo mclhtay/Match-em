@@ -25,6 +25,7 @@ const Text = styled.h1<{ animation: boolean }>`
   font-size: ${rem('40px')};
   color: white;
   opacity: ${props => (props.animation ? 0 : 1)};
+  text-align: center;
 `;
 
 const ImgZoom = keyframes`

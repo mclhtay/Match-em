@@ -52,9 +52,9 @@ export const Scout: React.FC<Props> = ({ scoutTitle, cost }: Props) => {
     dispatch(resetScoutAction());
     dispatch(userExistAction());
   };
-
+  const r = React.useRef<HTMLDivElement>(null);
   return (
-    <ScoutWrapper>
+    <ScoutWrapper ref={r}>
       {scout.isDone ? (
         <PostScout scouted={scout.scouted} onConfirm={handleConfirm} />
       ) : (
@@ -63,6 +63,7 @@ export const Scout: React.FC<Props> = ({ scoutTitle, cost }: Props) => {
             animationIndex={scout.index}
             inScout={scout.inScout}
             finalIndex={scout.finalIndex}
+            di={r}
           />
           {!scout.inScout && (
             <>
