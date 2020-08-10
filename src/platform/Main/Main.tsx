@@ -60,8 +60,8 @@ export const Main: React.FC = () => {
           defaultChar={key}
         />
       )}
-      {viewState === VIEW_STATE.SCOUT && <Redirect to="/scout" />}
-      {viewState === VIEW_STATE.GAME && <Redirect to="/game" />}
+      {viewState === VIEW_STATE.SCOUT && <Redirect to="/Match-em/scout" />}
+      {viewState === VIEW_STATE.GAME && <Redirect to="/Match-em/game" />}
       <MainWrapper>
         <CharacterPanel character={key} />
         <GamePanel

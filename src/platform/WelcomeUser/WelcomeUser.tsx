@@ -10,5 +10,7 @@ export const WelcomeUser: React.FC = () => {
   const userState = useSelector<StoreState, UserState>(prop('user'));
   const { isDoneOnboarding } = userState;
 
-  return <>{isDoneOnboarding ? <Redirect to="/main" /> : <NewUser />}</>;
+  return (
+    <>{isDoneOnboarding ? <Redirect to="/Match-em/main" /> : <NewUser />}</>
+  );
 };

@@ -61,7 +61,7 @@ export const FrontPage: React.FC = () => (
       <GameTitle>{gameTitle}</GameTitle>
       <LoginWrapper>
         <Login>
-          <Link className="no-decor" to="/login">
+          <Link className="no-decor" to="/Match-em/login">
             Start
           </Link>
         </Login>

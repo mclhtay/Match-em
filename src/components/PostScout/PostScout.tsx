@@ -84,7 +84,7 @@ export const PostScout: React.FC<Props> = ({ scouted, onConfirm }: Props) => {
         <img src={portraits[scouted.code].src} alt={scouted.name} />
       </ImgWrapper>
       <ButtonWrapper>
-        <Link to="/main">
+        <Link to="/Match-em/main">
           <Button
             animation={animation}
             onClick={onConfirm}

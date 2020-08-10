@@ -14,21 +14,22 @@ function App() {
       <Router>
         <Switch>
           <WebBackground>
-            <Route path="/" exact>
+            <Route path="/Match-em" exact>
               <FrontPage />
             </Route>
-            <Route path="/login">
+            <Route path="/Match-em/login">
               <UserLogin />
             </Route>
-            <Route path="/main">
+            <Route path="/Match-em/main">
               <Main />
             </Route>
-            <Route path="/scout">
+            <Route path="/Match-em/scout">
               <Scout scoutTitle="Hero Scout" cost={250} />
             </Route>
-            <Route path="/game">
+            <Route path="/Match-em/game">
               <Game />
             </Route>
+            <Route component={FrontPage} />
           </WebBackground>
         </Switch>
       </Router>

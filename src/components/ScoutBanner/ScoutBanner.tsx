@@ -77,7 +77,7 @@ export const ScoutBanner: React.FC<Props> = ({
         width: di.current.clientWidth
       });
     }
-  }, []);
+  }, [di]);
 
   React.useEffect(() => {
     if (curr.index < animationIndex.length && inScout) {

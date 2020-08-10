@@ -51,7 +51,7 @@ export const Game: React.FC = () => {
     return <Loading loadingMsg="loading" />;
   }
   if (!inGame) {
-    return <Redirect to="/main" />;
+    return <Redirect to="/Match-em/main" />;
   }
 
   const handleEnd = () => {
