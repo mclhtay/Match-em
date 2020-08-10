@@ -13,17 +13,17 @@ For a live running version hosted on github pages: [Match-em](https://mclhtay.gi
 
 ## Main interface
 
-![Image of main ui](https://github.com/mclhtay/Match-em/img/main.png)
+![Image of main ui](https://github.com/mclhtay/Match-em/blob/master/img/main.png)
 
 #### Earn diamonds through completing the game, use diamonds to scout more characters!
 
 ## Game Screen
 
-![Image of game](https://github.com/mclhtay/Match-em/img/game.png)
+![Image of game](https://github.com/mclhtay/Match-em/blob/master/img/game.png)
 
 ## Scout Screen
 
-![Image of scout](https://github.com/mclhtay/Match-em/img/scout.png)
+![Image of scout](https://github.com/mclhtay/Match-em/blob/master/img/scout.png)
 
 ## You want your own copy?
 
