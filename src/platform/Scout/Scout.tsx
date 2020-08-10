@@ -74,9 +74,11 @@ export const Scout: React.FC<Props> = ({ scoutTitle, cost }: Props) => {
                 disabled={userDiamonds}
               />
 
-              <Link type="button" to="/Match-em/main">
-                Cancel
-              </Link>
+              {cost !== 0 && (
+                <Link type="button" to="/Match-em/main">
+                  Cancel
+                </Link>
+              )}
             </>
           )}
         </>
