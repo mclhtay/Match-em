@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 `;
 
 const Title = styled.h1`
@@ -27,15 +28,16 @@ const Title = styled.h1`
 
 const Inner = styled.div`
   display: flex;
-
   align-items: center;
   justify-content: center;
   max-height: 20%;
-  max-width: 20%;
-  font-size: ${rem('50px')};
+  width: 100%;
+  font-size: ${rem('30px')};
 `;
 
-const ButtonWrapper = styled.div``;
+const ButtonWrapper = styled.div`
+  text-align: center;
+`;
 
 const Cancel = styled.button.attrs({ type: 'button' })`
   cursor: pointer;
@@ -65,6 +67,10 @@ const Confirm = styled.button.attrs({ type: 'button' })`
   line-height: ${rem('50px')};
 `;
 
+const ImgWrapper = styled.div`
+  max-width: 30%;
+`;
+
 const Text = styled.div``;
 
 export const GameEnd: React.FC<Props> = ({
@@ -78,9 +84,14 @@ export const GameEnd: React.FC<Props> = ({
       <Title>
         {hasWon ? 'Congratulations' : 'Are you sure you want to exit?'}
       </Title>
-
       <Inner>
-        <img src={components.diamond} alt="diamond" />
+        <ImgWrapper>
+          <img
+            style={{ width: '100%' }}
+            src={components.diamond}
+            alt="diamond"
+          />
+        </ImgWrapper>
         <Text>+{Math.floor((score || 0) / 100)}</Text>
       </Inner>
       <ButtonWrapper>

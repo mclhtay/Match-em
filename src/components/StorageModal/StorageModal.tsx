@@ -10,6 +10,7 @@ import {
 import { thumbnails } from 'src/assets/thumbnails';
 import { rem } from 'polished';
 import { useDispatch } from 'react-redux';
+import { useSize } from 'src/hooks/useSize';
 
 interface Props {
   characters: Characters;
@@ -26,6 +27,7 @@ const ModalContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 `;
 
 const ModalTitle = styled.h1`
@@ -61,9 +63,12 @@ const ButtonsWrapper = styled.div`
   margin: ${rem('10px')};
 `;
 
-const Button = styled.button.attrs({ type: 'button' })<{ disabled?: boolean }>`
+const Button = styled.button.attrs({ type: 'button' })<{
+  disabled?: boolean;
+  size: number;
+}>`
   height: ${rem('50px')};
-  width: ${rem('200px')};
+  width: ${({ size }) => rem(`${size}px`)};
   background-color: #0047ab;
   color: white;
   margin: ${rem('10px')};
@@ -85,6 +90,8 @@ export const StorageModal: React.FC<Props> = ({
   onClose
 }: Props) => {
   const dispatch = useDispatch();
+  const ref = React.useRef<HTMLDivElement>(null);
+  const { width } = useSize(ref);
   React.useEffect(() => {
     document.addEventListener('keydown', keyboardListener(onClose));
   }, [onClose]);
@@ -101,7 +108,7 @@ export const StorageModal: React.FC<Props> = ({
 
   return (
     <Modal>
-      <ModalContentWrapper>
+      <ModalContentWrapper ref={ref}>
         <ModalTitle>your characters</ModalTitle>
         <CharactersWrapper>
           {characters.map((c: Character) => (
@@ -117,12 +124,15 @@ export const StorageModal: React.FC<Props> = ({
 
         <ButtonsWrapper>
           <Button
+            size={width * 0.3}
             disabled={selected === defaultChar}
             onClick={handleSetDefault}
           >
             Set Default
           </Button>
-          <Button onClick={onClose}>Done</Button>
+          <Button onClick={onClose} size={width * 0.3}>
+            Done
+          </Button>
         </ButtonsWrapper>
       </ModalContentWrapper>
     </Modal>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Foreground } from '../Foreground';
 import left from '../../assets/portraits/a-sinon.png';
 import right from '../../assets/portraits/w-kirito.png';
+import { isMobile } from 'react-device-detect';
 
 const WebWrapper = styled.div`
   position: absolute;
@@ -30,12 +31,17 @@ interface Props {
 
 export const WebBackground: React.FC<Props> = ({ children }: Props) => (
   <WebWrapper>
-    <Image>
-      <img src={left} alt="left display" />
-    </Image>
-    <Foreground>{children}</Foreground>
-    <Image>
-      <img src={right} alt="right display" />
-    </Image>
+    {!isMobile && (
+      <Image>
+        <img src={left} alt="left display" />
+      </Image>
+    )}
+
+    <Foreground isMobile={isMobile}>{children}</Foreground>
+    {!isMobile && (
+      <Image>
+        <img src={right} alt="right display" />
+      </Image>
+    )}
   </WebWrapper>
 );

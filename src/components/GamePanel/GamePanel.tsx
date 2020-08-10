@@ -8,6 +8,7 @@ interface Props {
   onGame: () => void;
   onStorage: () => void;
   onScout: () => void;
+  width: number;
 }
 
 const Wrapper = styled.div`
@@ -19,13 +20,13 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Button = styled.div`
+const Button = styled.div<{ size: number }>`
   cursor: pointer;
   text-transform: capitalize;
   text-align: center;
   background-color: #0047ab;
   color: white;
-  width: ${rem('200px')};
+  width: ${({ size }) => rem(`${size}px`)};
   height: ${rem('50px')};
   margin: ${rem('10px')};
   border-radius: 5px;
@@ -33,8 +34,8 @@ const Button = styled.div`
   line-height: ${rem('50px')};
 `;
 
-const Text = styled.h1`
-  font-size: ${rem('50px')};
+const Text = styled.h1<{ size: number }>`
+  font-size: ${({ size }) => rem(`${size}px`)};
 `;
 
 const DiamondWrapper = styled.div`
@@ -54,18 +55,25 @@ export const GamePanel: React.FC<Props> = ({
   diamonds,
   onGame,
   onStorage,
-  onScout
+  onScout,
+  width
 }: Props) => {
   return (
     <Wrapper>
-      <Text>{username}</Text>
+      <Text size={width * 0.1}>{username}</Text>
       <DiamondWrapper>
         <Diamond src={components.diamond} alt="diamonds" />
-        <Text>x {diamonds}</Text>
+        <Text size={width * 0.05}>x {diamonds}</Text>
       </DiamondWrapper>
-      <Button onClick={onGame}>Play</Button>
-      <Button onClick={onStorage}>Characters</Button>
-      <Button onClick={onScout}>Scout</Button>
+      <Button size={width * 0.3} onClick={onGame}>
+        Play
+      </Button>
+      <Button size={width * 0.3} onClick={onStorage}>
+        Characters
+      </Button>
+      <Button size={width * 0.3} onClick={onScout}>
+        Scout
+      </Button>
     </Wrapper>
   );
 };

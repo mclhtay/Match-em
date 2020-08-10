@@ -9,6 +9,7 @@ import { CharacterPanel } from 'src/components/CharacterPanel';
 import { GamePanel } from 'src/components/GamePanel';
 import { StorageModal } from 'src/components/StorageModal';
 import { startGameAction } from 'src/store/reducers/game';
+import { useSize } from 'src/hooks/useSize';
 
 const MainWrapper = styled.div`
   height: 100%;
@@ -34,6 +35,8 @@ export const Main: React.FC = () => {
     setViewState(VIEW_STATE.GAME);
     dispatch(startGameAction());
   };
+  const ref = React.useRef<HTMLDivElement>(null);
+  const { width } = useSize(ref);
   const handleStorage = () => {
     if (viewState === VIEW_STATE.STORAGE) setViewState(VIEW_STATE.MAIN);
     else setViewState(VIEW_STATE.STORAGE);
@@ -62,14 +65,15 @@ export const Main: React.FC = () => {
       )}
       {viewState === VIEW_STATE.SCOUT && <Redirect to="/Match-em/scout" />}
       {viewState === VIEW_STATE.GAME && <Redirect to="/Match-em/game" />}
-      <MainWrapper>
-        <CharacterPanel character={key} />
+      <MainWrapper ref={ref}>
+        <CharacterPanel character={key} width={width} />
         <GamePanel
           username={username}
           diamonds={diamonds}
           onGame={handleGame}
           onStorage={handleStorage}
           onScout={handleScout}
+          width={width}
         />
       </MainWrapper>
     </>

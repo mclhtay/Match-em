@@ -6,6 +6,7 @@ import { rem } from 'polished';
 
 interface Props {
   character: string;
+  width: number;
 }
 
 const Wrapper = styled.div`
@@ -71,18 +72,21 @@ const CharacterWrapper = styled.div`
   width: 100%;
 `;
 
-const CharacterName = styled.h1<{ color: string }>`
-  font-size: ${rem('80px')};
+const CharacterName = styled.h1<{ color: string; size: number }>`
+  font-size: ${({ size }) => rem(`${size}px`)};
   text-transform: capitalize;
   margin: ${rem('10px')};
   color: ${props => props.color};
 `;
 
-export const CharacterPanel: React.FC<Props> = ({ character }: Props) => {
+export const CharacterPanel: React.FC<Props> = ({
+  character,
+  width
+}: Props) => {
   return (
     <Wrapper>
       <BackgroundWrapper>
-        <CharacterName color={portraits[character].color}>
+        <CharacterName color={portraits[character].color} size={width * 0.1}>
           {portraits[character].name}
         </CharacterName>
         <CharacterWrapper>
