@@ -29,6 +29,7 @@ function App() {
             <Route path="/Match-em/game">
               <Game />
             </Route>
+            <Route path="/" exact component={FrontPage} />
           </WebBackground>
         </Switch>
       </Router>

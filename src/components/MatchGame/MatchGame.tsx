@@ -168,8 +168,8 @@ export const MatchGame: React.FC<Props> = ({
       } else {
         setMatched(false);
       }
+      setSelected(-1);
       setTimeout(() => {
-        setSelected(-1);
         setMatched(undefined);
       }, 1000);
     }
