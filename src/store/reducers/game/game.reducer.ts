@@ -6,7 +6,8 @@ const initialState: GameState = {
   loading: false,
   board: [],
   inGame: false,
-  score: 0
+  score: 0,
+  bonusDone: false,
 };
 
 const gameSlice = createSlice({
@@ -28,11 +29,14 @@ const gameSlice = createSlice({
     ) => {
       state.board = action.payload.board;
       state.score = action.payload.score;
+    },
+    bonusSuccess: (state) => {
+      state.bonusDone = true;
     }
   }
 });
 
-const { startGame, boardLoaded, endGame, updateGame } = gameSlice.actions;
+const { startGame, boardLoaded, endGame, updateGame, bonusSuccess } = gameSlice.actions;
 
 export default gameSlice.reducer;
 
@@ -40,7 +44,6 @@ export const startGameAction = () => dispatch => {
   dispatch(startGame());
 
   const board = generateBoard(9, 2);
-  console.log(board);
   dispatch(boardLoaded({ board }));
 };
 
@@ -58,7 +61,6 @@ export const updateGameAction = (seq1: number, seq2: number) => (
         : c
     )
   );
-  console.log(newBoard);
   newBoard = findMatches(newBoard);
   dispatch(updateGame({ board: newBoard, score: score + 100 }));
 };
@@ -66,8 +68,14 @@ export const updateGameAction = (seq1: number, seq2: number) => (
 export const endGameAction = () => (dispatch, getState) => {
   const {
     user: { diamonds },
-    game: { score }
+    game: { score, bonusDone }
   } = getState();
-  dispatch(updateUserAction({ diamonds: diamonds + Math.floor(score / 100) }));
+  const earnedDiamonds = Math.floor(score / 100) * (bonusDone ? 5 : 1);
+  dispatch(updateUserAction({ diamonds: diamonds + earnedDiamonds }));
   dispatch(endGame());
 };
+
+
+export const bonusSuccessAction = () => dispatch => {
+  dispatch(bonusSuccess());
+}

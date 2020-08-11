@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components';
 import title from '../../assets/components/title.png';
 import { gameTitle } from '../constants';
 import { Link } from 'react-router-dom';
-import { rem } from 'polished';
 import { useSize } from 'src/hooks/useSize';
 const FPWrapper = styled.div`
   height: 100%;
@@ -58,7 +57,6 @@ const Login = styled.h4`
 export const FrontPage: React.FC = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   const { width } = useSize(ref);
-  console.log(width);
   return (
     <FPWrapper>
       <img src={title} width="100%" height="100%" alt="frontpage" />

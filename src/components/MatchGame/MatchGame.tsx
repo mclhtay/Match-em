@@ -5,6 +5,8 @@ import { thumbnails } from 'src/assets/thumbnails';
 import { rem } from 'polished';
 import debounce from 'lodash.debounce';
 import { GameEnd } from '../GameEnd';
+import { useBoardStats } from 'src/hooks/useBoardStats';
+import { Timer } from '../Timer';
 
 interface Props {
   score: number;
@@ -76,6 +78,9 @@ const TileWrapper = styled.div<{
     ${props => (props.border ? 'cursor: pointer' : 'none')};
   }
   ${props => props.selected && 'border: 2px solid white'};
+  img{
+    -webkit-user-drag: none;
+  }
 `;
 
 const Check = styled.div<{ success: boolean; top: number; left: number }>`
@@ -85,7 +90,7 @@ const Check = styled.div<{ success: boolean; top: number; left: number }>`
   color: ${props => (props.success ? 'white' : 'black')};
   top: ${props => props.top + 'px'};
   left: ${props => props.left + 'px'};
-  animation: ${Disappear} 1s linear;
+  animation: ${Disappear} 0.5s linear;
   width: ${rem('100px')};
   height: ${rem('100px')};
   font-size: ${rem('50px')};
@@ -93,6 +98,7 @@ const Check = styled.div<{ success: boolean; top: number; left: number }>`
   justify-content: center;
   align-items: center;
   opacity: 0;
+  pointer-events: none;
 `;
 
 const ScoreWrapper = styled.div`
@@ -111,18 +117,22 @@ export const MatchGame: React.FC<Props> = ({
   const [width, setWidth] = React.useState<number>(0);
   const [selected, setSelected] = React.useState<number>(-1);
   const [matched, setMatched] = React.useState<boolean | undefined>(undefined);
+  const [check, setCheck] = React.useState<boolean | undefined>(undefined);
   const [done, setDone] = React.useState<boolean>(false);
+  const { initialSize, currentSize, hasWon } = useBoardStats(board);
+
   React.useEffect(() => {
     if (panelRef.current) {
       setHeight(panelRef.current.clientHeight);
       setWidth(panelRef.current.clientWidth);
     }
   }, []);
+
   React.useEffect(() => {
-    if (score === 1800) {
+    if (hasWon) {
       setDone(true);
     }
-  }, [score]);
+  }, [hasWon]);
 
   React.useEffect(() => {
     const handleResize = debounce(function setDimenstions() {
@@ -164,19 +174,25 @@ export const MatchGame: React.FC<Props> = ({
       }
       if (adjList.includes(seq)) {
         setMatched(true);
+        setCheck(true);
         handleUpdate(selected, seq);
       } else {
         setMatched(false);
+        setCheck(false);
       }
       setSelected(-1);
       setTimeout(() => {
         setMatched(undefined);
-      }, 1000);
+        setTimeout(() => {
+          setCheck(undefined);
+        }, 500)
+      }, 100);
     }
   };
 
   return (
     <>
+      {currentSize / initialSize <= 0.5 && <Timer hasWon={hasWon} />}
       <ScoreWrapper>
         <Score>score: {score}</Score>
         <ExitWrapper>
@@ -185,24 +201,24 @@ export const MatchGame: React.FC<Props> = ({
       </ScoreWrapper>
 
       <GameWrapper ref={panelRef}>
-        {matched !== undefined &&
-          (matched ? (
+        {check !== undefined &&
+          (check ? (
             <Check
               top={height / 2 - 50}
               left={width / 2 - 50}
-              success={matched}
+              success={check}
             >
               &#10004;
             </Check>
           ) : (
-            <Check
-              top={height / 2 - 50}
-              left={width / 2 - 50}
-              success={matched}
-            >
-              &#10005;
-            </Check>
-          ))}
+              <Check
+                top={height / 2 - 50}
+                left={width / 2 - 50}
+                success={check}
+              >
+                &#10005;
+              </Check>
+            ))}
         {board.map(r =>
           r.map(c => {
             const seq = c.sequence;
@@ -239,7 +255,7 @@ export const MatchGame: React.FC<Props> = ({
       {done && (
         <GameEnd
           score={score}
-          hasWon={score === 1800}
+          hasWon={done}
           onConfirm={handleEnd}
           onCancel={() => setDone(false)}
         />

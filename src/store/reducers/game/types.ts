@@ -3,6 +3,7 @@ export interface GameState {
   board: Array<Array<Tile>>;
   score: number;
   loading: boolean;
+  bonusDone: boolean;
 }
 
 export interface Tile {

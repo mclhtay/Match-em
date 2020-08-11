@@ -52,7 +52,7 @@ export const Main: React.FC = () => {
     diamonds,
     characters
   } = user;
-  if (!key) return <Redirect to="/" />;
+  if (!key) return <Redirect to="/Match-em" />;
 
   return (
     <>

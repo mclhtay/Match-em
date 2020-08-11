@@ -39,7 +39,7 @@ const traverseMatrix = (
   return;
 };
 
-const create2DArray = (x: number, y: number): boolean[][] => {
+export const create2DArray = (x: number, y: number): boolean[][] => {
   const r: boolean[][] = [];
   for (let i = 0; i < x; i++) {
     r.push([]);

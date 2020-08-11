@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import { Modal } from '../Modal';
 import { components } from '../../assets/components';
 import { rem } from 'polished';
-
+import { useSelector } from 'react-redux';
+import { StoreState } from 'src/store/store';
+import { path } from 'ramda';
 interface Props {
   hasWon: boolean;
   score?: number;
@@ -71,15 +73,30 @@ const ImgWrapper = styled.div`
   max-width: 30%;
 `;
 
-const Text = styled.div``;
+const Text = styled.div`
+  display: inline;
+`;
+
+const multiplier = 5;
+
+const Multipler = styled.div`
+  color: red;
+  font-size: ${rem("50px")};
+  font-weight: bold;
+  display: inline;
+  margin-left: 15px;
+`;
 
 export const GameEnd: React.FC<Props> = ({
   hasWon,
   score,
   onConfirm,
   onCancel
-}: Props) => (
-  <Modal>
+}: Props) => {
+
+  const bonusDone = useSelector<StoreState, boolean>(path(['game', 'bonusDone']));
+
+  return (<Modal>
     <Wrapper>
       <Title>
         {hasWon ? 'Congratulations' : 'Are you sure you want to exit?'}
@@ -92,12 +109,13 @@ export const GameEnd: React.FC<Props> = ({
             alt="diamond"
           />
         </ImgWrapper>
-        <Text>+{Math.floor((score || 0) / 100)}</Text>
+        <Text>+{Math.floor((score || 0) / 100)}
+          <Multipler>{bonusDone && `x${multiplier}`}</Multipler></Text>
       </Inner>
       <ButtonWrapper>
         <Confirm onClick={onConfirm}>confirm</Confirm>
         {!hasWon && <Cancel onClick={onCancel}>cancel</Cancel>}
       </ButtonWrapper>
     </Wrapper>
-  </Modal>
-);
+  </Modal>)
+};
