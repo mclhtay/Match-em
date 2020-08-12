@@ -38,8 +38,8 @@ const buttonFlash = keyframes`
 const FormInnerWrapper = styled.form`
   position: relative;
   color: black;
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   text-align: center;
   display: flex;
   flex-direction: column;

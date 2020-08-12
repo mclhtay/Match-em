@@ -7,7 +7,7 @@ import debounce from 'lodash.debounce';
 import { GameEnd } from '../GameEnd';
 import { useBoardStats } from 'src/hooks/useBoardStats';
 import { Timer } from '../Timer';
-import { shortestPath, drawLine } from './functions';
+import { shortestPath, drawLine, checkEmptyBoard } from './functions';
 interface Props {
   score: number;
   board: Tile[][];
@@ -78,7 +78,7 @@ const TileWrapper = styled.div<{
     ${props => (props.border ? 'cursor: pointer' : 'none')};
   }
   ${props => props.selected && 'border: 2px solid white'};
-  img{
+  img {
     -webkit-user-drag: none;
   }
 `;
@@ -173,7 +173,7 @@ export const MatchGame: React.FC<Props> = ({
         if (found) break;
       }
       if (adjList.includes(seq)) {
-        const path = (shortestPath(board, selected, seq));
+        const path = shortestPath(board, selected, seq);
         setMatched(true);
         drawLine(tileWidth, tileHeight, path, selected);
         setCheck(true);
@@ -188,7 +188,7 @@ export const MatchGame: React.FC<Props> = ({
         setMatched(undefined);
         setTimeout(() => {
           setCheck(undefined);
-        }, 500)
+        }, 500);
       }, 100);
     }
   };
@@ -207,22 +207,14 @@ export const MatchGame: React.FC<Props> = ({
         <canvas id="lineCanvas" width={width} height={height} />
         {check !== undefined &&
           (check ? (
-            <Check
-              top={height / 2 - 50}
-              left={width / 2 - 50}
-              success={check}
-            >
+            <Check top={height / 2 - 50} left={width / 2 - 50} success={check}>
               &#10004;
             </Check>
           ) : (
-              <Check
-                top={height / 2 - 50}
-                left={width / 2 - 50}
-                success={check}
-              >
-                &#10005;
-              </Check>
-            ))}
+            <Check top={height / 2 - 50} left={width / 2 - 50} success={check}>
+              &#10005;
+            </Check>
+          ))}
         {board.map(r =>
           r.map(c => {
             const seq = c.sequence;
@@ -259,7 +251,7 @@ export const MatchGame: React.FC<Props> = ({
       {done && (
         <GameEnd
           score={score}
-          hasWon={done}
+          hasWon={checkEmptyBoard(board)}
           onConfirm={handleEnd}
           onCancel={() => setDone(false)}
         />
