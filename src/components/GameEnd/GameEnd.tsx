@@ -24,7 +24,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: ${rem('50px')};
+  font-size: ${rem('35px')};
   text-transform: capitalize;
 `;
 

@@ -45,15 +45,25 @@ const TimerComponent = styled.time`
 export const Timer: React.FC<Props> = ({ hasWon }: Props) => {
   const dispatch = useDispatch();
   const [timeRemain, setTimeRemain] = React.useState<number>(InitialTime);
-
+  const [bonusWon, setBonusWon] = React.useState<boolean>(false);
   React.useEffect(() => {
     const interval = setInterval(() => {
-      setTimeRemain(prev => prev <= 0 || hasWon ? prev : prev - 1);
+      setTimeRemain(prev => prev < 0 || hasWon ? prev : prev - 1);
     }, 1000);
+    if (timeRemain >= 0 && hasWon) {
+      setBonusWon(true);
+    }
+
+    if (!hasWon && timeRemain == 0) {
+      setTimeRemain(-1);
+    }
+
+
     return () => clearInterval(interval);
   }, [timeRemain]);
-  if (timeRemain === 0 || hasWon) {
-    if (hasWon) {
+
+  if (timeRemain <= 0 || hasWon) {
+    if (hasWon && bonusWon) {
       dispatch(bonusSuccessAction());
     } else
       return <> Bonus Time Out! </>;
@@ -61,7 +71,7 @@ export const Timer: React.FC<Props> = ({ hasWon }: Props) => {
   return (
     <Wrapper>
       <TextComponent>Bonus Reward Time!</TextComponent>
-      <TimerComponent>0:0{timeRemain}</TimerComponent>
+      <TimerComponent>0:0{timeRemain >= 0 ? timeRemain : 0}</TimerComponent>
     </Wrapper>
   )
 

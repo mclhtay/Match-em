@@ -7,7 +7,7 @@ import debounce from 'lodash.debounce';
 import { GameEnd } from '../GameEnd';
 import { useBoardStats } from 'src/hooks/useBoardStats';
 import { Timer } from '../Timer';
-
+import { shortestPath, drawLine } from './functions';
 interface Props {
   score: number;
   board: Tile[][];
@@ -173,8 +173,11 @@ export const MatchGame: React.FC<Props> = ({
         if (found) break;
       }
       if (adjList.includes(seq)) {
+        const path = (shortestPath(board, selected, seq));
         setMatched(true);
+        drawLine(tileWidth, tileHeight, path, selected);
         setCheck(true);
+
         handleUpdate(selected, seq);
       } else {
         setMatched(false);
@@ -201,6 +204,7 @@ export const MatchGame: React.FC<Props> = ({
       </ScoreWrapper>
 
       <GameWrapper ref={panelRef}>
+        <canvas id="lineCanvas" width={width} height={height} />
         {check !== undefined &&
           (check ? (
             <Check
